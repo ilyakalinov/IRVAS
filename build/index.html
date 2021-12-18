@@ -6,14 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/favicon.ico">
     <title>Ирвас окна</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <!-- Slick Slider -->
     <link rel="stylesheet" href="slick/slick.css">
     <link rel="stylesheet" href="slick/slick-theme.css">
     <!-- Animate -->
-    <link rel="stylesheet" href="css/animate.min.css">
     <link href="css/style.css" rel="stylesheet">
   </head>
 
@@ -365,7 +363,7 @@
           <div class="row">
             
             <!-- internal -->
-            <div class="internal">
+            <div class="internal decoration_content__item">
               <div class="col-lg-3 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 no-padding">
                 <div class="decoration_img">
                   <img src="img/decoration/decoration_img.png" alt="">
@@ -423,7 +421,7 @@
             </div> <!-- /internal -->
 
             <!-- external -->
-            <div class="external">
+            <div class="external decoration_content__item">
               <div class="col-lg-3 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 no-padding">
                 <div class="decoration_img">
                   <img src="img/decoration/2/decoration2_img.png" alt="" style="margin-top: 3rem;">
@@ -482,7 +480,7 @@
             <!-- .external -->
 
             <!-- rising -->
-            <div class="rising">
+            <div class="rising decoration_content__item">
               <div class="col-lg-3 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 no-padding">
                 <div class="decoration_img">
                   <img src="img/decoration/3/decoration3_img.jpg" alt="" style="margin-top: 3rem;">
@@ -534,7 +532,7 @@
             <!-- /rising -->
 
             <!-- roof -->
-            <div class="roof">
+            <div class="roof decoration_content__item">
               <div class="col-lg-3 col-md-4 col-md-offset-0 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 no-padding">
                 <div class="decoration_img">
                   <img src="img/decoration/4/decoration4_img.png" alt="" style="margin-top: 3rem;">
@@ -803,7 +801,7 @@
     <div class="popup">
         <div class="popup_dialog">
             <div class="popup_content text-center">
-                <button type="button" class="popup_close"><strong>&times;</strong></button>
+                <button data-close type="button" class="popup_close"><strong data-close>&times;</strong></button>
                 <div class="popup_form">
                     <form class="form" action="#">
                       <h2>Введите ваши данные <br>и нажмите заказать звонок</h2>
@@ -821,7 +819,7 @@
     <div class="popup_engineer">
         <div class="popup_dialog">
             <div class="popup_content text-center">
-                <button type="button" class="popup_close"><strong>&times;</strong></button>
+                <button data-close type="button" class="popup_close"><strong data-close>&times;</strong></button>
                 <div class="popup_form">
                     <form class="form" action="#">
                       <h2>Запишитесь сегодня на <br><span>бесплатный замер</span></h2>
@@ -915,11 +913,7 @@
             </div>
         </div>
     </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Add slick.js -->
-    <script src="slick/slick.min.js"></script>
+    <script src="js/bundle.js"></script>
     <!-- Initialize modal, sliders -->
-
   </body>
 </html>

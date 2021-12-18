@@ -1,3 +1,4 @@
+
 var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 var del = require('del');
@@ -6,13 +7,14 @@ var concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 var sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack-stream');
-const webpackConfig = require('./webpack.config.js');
+const webpackConfig = require('./webpack.config');
 
 let cssFiles = [
 		'./node_modules/normalize.css/normalize.css',
 		'./src/css/style.css',
 		'./src/css/animate.min.css',
 		'./src/css/bootstrap.css',
+		'./src/css/style.me.css'
 ];
 
 function clear(){
@@ -35,7 +37,6 @@ function styles() {
 				.pipe(gulp.dest('../OpenServer/JS/css' ))
 				.pipe(browserSync.stream());
 };
-
 function img() {
 	return gulp.src('./src/img/**/*')
 				.pipe(gulp.dest('./build/img'))
@@ -48,13 +49,10 @@ function html() {
 };
 function js(){
 	return gulp.src('./src/js/script.js')
-			//.pipe(gulp.dest('./build/js'))
 			.pipe(browserSync.stream());
 };
 function jsAll(){
 	return gulp.src('./src/js/*')
-			// .pipe(gulp.dest('./build/js'))
-			// .pipe(gulp.dest('../OpenServer/domains/JS/js'))
 			.pipe(browserSync.stream());
 };
 function json(){
@@ -65,7 +63,7 @@ function json(){
 function script() {
 	return gulp.src('./src/js/script.js')
 		.pipe(webpack(webpackConfig))
-		// .pipe(gulp.dest('./build/js'))
+		.pipe(gulp.dest('./build/js'))
 		.pipe(browserSync.stream());
 }
 function fonts(){
@@ -73,21 +71,27 @@ function fonts(){
 		.pipe(gulp.dest('./build/fonts'))
 		.pipe(browserSync.stream());
 }
+function server(){
+	return gulp.src('./src/server.php')
+		.pipe(gulp.dest('./build'))
+		.pipe(browserSync.stream());
+}
 function watch(){
-	gulp.watch('./src/css/**/*.css', styles)
-	gulp.watch('./src/index.html', html)
-	gulp.watch('./src/js/script.js', js)
-	gulp.watch('./src/js/*.js', jsAll)
-	gulp.watch('src/img/**/*')
+	gulp.watch('./src/css/**/*.css', styles),
+	gulp.watch('./src/index.html', html),
+	gulp.watch('./src/js/script.js', js),
+	gulp.watch('./src/js/*.js', jsAll),
+	gulp.watch('src/img/**/*'),
+	gulp.watch('./src/server.php', server),
 	browserSync.init({
         server: {
             baseDir: "./build"
         }
     });
-};
+}
 
 let build = gulp.series(clear,
-	gulp.parallel(styles, img, html, js, jsAll, json, fonts));
+	gulp.parallel(styles, img, html, js, jsAll, json, fonts, server));
 
 gulp.task('build', build);
 gulp.task('prod', gulp.series(build, script));
