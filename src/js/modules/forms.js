@@ -1,20 +1,12 @@
 import {openModal, closeModal} from "./modal";
 import {postData} from '../services';
+import {checkNumImputs} from "../services";
 
-const forms = (formSelector, modalSelector, modalTimerId) => {
+const forms = (formSelector, modalSelector, modalTimerId, state) => {
     const forms = document.querySelectorAll(formSelector),
         inputPhone = document.querySelectorAll('input[name="user_phone"]');
 
-    inputPhone.forEach(item => {
-        item.addEventListener('input', () => {
-        if (item.value.match(/\D/g)) {
-            item.style.border = '1px solid red';
-        } else {
-            item.style.border = '1px solid #ccc';
-        }
-        });
-       
-    });
+    checkNumImputs(inputPhone);
 
     const message = {
         load: './img/spinner.svg',
@@ -36,6 +28,11 @@ const forms = (formSelector, modalSelector, modalTimerId) => {
             form.insertAdjacentElement('afterend', loadModal);
 
             const formData = new FormData(form);
+            if(form.getAttribute('data-calc') == 'end') {
+                for(let key in state) {
+                    formData.append(key, state[key]);
+                }
+            }
             const toJson = JSON.stringify(Object.fromEntries(formData.entries()));
 
             postData('http://localhost:3000/posts', toJson)
