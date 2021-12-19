@@ -16,9 +16,11 @@ let cssFiles = [
 		'./src/css/bootstrap.css',
 		'./src/css/style.me.css'
 ];
-
 function clear(){
 	return del('./build/*');
+}
+function clearProd(){
+	return del('./prodaction/*');
 }
 
 function styles() {
@@ -134,7 +136,7 @@ let build = gulp.series(clear,
 	gulp.parallel(styles, img, html, js, jsAll, json, server));
 
 gulp.task('build', build);
-gulp.task('prod', gulp.series(clear,
+gulp.task('prod', gulp.series(clearProd,
 	gulp.parallel(stylesProd, imgProd, htmlProd, jsonProd, jsonProd, serverProd, serverJson), scriptProd));
 gulp.task('watch', gulp.series(build,
 	gulp.parallel(script, watch)));
